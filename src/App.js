@@ -7,7 +7,7 @@ import {updateUser} from './actions/user-actions';
 
 class App extends Component {
   onUpdateUser = () => {
-    this.props.dispatch(updateUser('updated user'));
+    this.props.dispatch(updateUser('updated user - ' + Math.floor(Math.random() * 10)));
   };
 
   render() {
