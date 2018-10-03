@@ -14,7 +14,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="App">
         <header className="App-header">
@@ -31,7 +30,7 @@ const mapStateToProps = (state, props) => {/*storedaki state i comnponent içind
   /*return {products: state.products};//burada sadece belirli bir state i alarak, diğer state fields i filtreleyebiliriz*/
   return {
     ...state,
-    myCount:props.count + 2
+    myCount: props.count + 2
   };
 };
 
@@ -39,5 +38,12 @@ const mapDispatchToProps = {
   onUpdateUser: updateUser
 };
 
+const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {/*hangi propsun nereden geldiğini bu şekilde görebiliriz*/
+  console.log(propsFromState);
+  console.log(propsFromDispatch);
+  console.log(ownProps);
+  return {...propsFromState, ...propsFromDispatch, ...ownProps};
+};
+
 /*store ile component bağlantısını sağlıyoruz*/
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);
