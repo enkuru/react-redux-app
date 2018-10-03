@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import {connect} from 'react-redux';
+import {updateUser} from './actions/user-actions';
+
 class App extends Component {
+  onUpdateUser = () => {
+    this.props.dispatch(updateUser('updated user'));
+  };
+
   render() {
+    console.log(this.props);
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <img src={logo} className="App-logo" alt="logo"/>
+          <p>{this.props.user}</p>
+          <button onClick={this.onUpdateUser}>Change the user</button>
         </header>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {/*storedaki state i comnponent içinde kullanabilmeyi sağlıyoruz */
+  /*return {products: state.products};//burada sadece belirli bir state i alarak, diğer state fields i filtreleyebiliriz*/
+  return state;
+};
+
+/*store ile component bağlantısını sağlıyoruz*/
+export default connect(mapStateToProps)(App);
