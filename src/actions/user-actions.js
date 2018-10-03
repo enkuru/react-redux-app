@@ -31,10 +31,23 @@ export function showError(error) {
   }
 }
 
+/*
 export function getUsers() {
   return dispatch => {
     axios.get('https://jsonplaceholder.typicode.com/users/1').then(response => response.data)
       .then(user => dispatch(updateUser(user.name)))
       .catch(error => dispatch(showError(error)))
+  }
+}
+*/
+
+export function getUsers() {
+  return async dispatch => {/*es6 özelliği ile async metod tanımı yapıyoruz*/
+    try {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/users/1');/*await ile burada kod success/error a kadar bekleyecek*/
+      dispatch(updateUser(res.data.name));
+    } catch (err) {
+      dispatch(showError(err));
+    }
   }
 }
