@@ -51,5 +51,12 @@ const mapDispatchToProps = {
   onGetUsers: getUsers
 };
 
+const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {/*hangi propsun nereden geldiğini bu şekilde görebiliriz*/
+  /*console.log(propsFromState);
+  console.log(propsFromDispatch);
+  console.log(ownProps);*/
+  return {...propsFromState, ...propsFromDispatch, ...ownProps};
+};
+
 /*store ile component bağlantısını sağlıyoruz*/
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);

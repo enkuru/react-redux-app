@@ -14,8 +14,7 @@ export function updateUser(newUser) {
 
 export function getUsers() {
   return dispatch => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.data)
+    axios.get('https://jsonplaceholder.typicode.com/users').then(response => response.data)
       .then(data => console.log(data))
       .catch(error => console.log(error))
   }
