@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {combineReducers, createStore} from 'redux';
+import {compose, applyMiddleware, combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 
 import userReducer from './reducers/userReducer';
 import productsReducer from './reducers/productsReducer';
@@ -13,6 +14,11 @@ const rootReducer = combineReducers({
   user: userReducer,
   products: productsReducer,
 });
+
+const allEnhancers = compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const store = createStore(/*set initial state to reducers*/
   rootReducer,
@@ -23,7 +29,7 @@ const store = createStore(/*set initial state to reducers*/
     }],
     user: 'USER'
   },
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  allEnhancers
 );
 /*
 const updateUserAction = {
