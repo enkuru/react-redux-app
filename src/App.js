@@ -7,7 +7,10 @@ import {updateUser} from './actions/user-actions';
 
 class App extends Component {
   onUpdateUser = () => {
-    this.props.dispatch(updateUser('updated user - ' + Math.floor(Math.random() * 10)));
+    // this.props.dispatch(updateUser('updated user - ' + Math.floor(Math.random() * 10)));
+
+    this.props.onUpdateUser('updated user');
+    /*mapDispatchToProps ile bu şekilde dispatch etmeden kullanmamıza olanak sağlar*/
   };
 
   render() {
@@ -29,5 +32,9 @@ const mapStateToProps = state => {/*storedaki state i comnponent içinde kullana
   return state;
 };
 
+const mapDispatchToProps = {
+  onUpdateUser: updateUser
+};
+
 /*store ile component bağlantısını sağlıyoruz*/
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
