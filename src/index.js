@@ -23,8 +23,19 @@ const action = {
   }
 };
 
+const action2 = {
+  type: 'changeTheChange',
+  payload: {
+    newState: 'new state 2'
+  }
+};
+
+store.subscribe(() => {
+  console.log('Store updated:', store.getState());
+});
+
 store.dispatch(action);
-console.log(store.getState());
+store.dispatch(action2);
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 serviceWorker.unregister();
