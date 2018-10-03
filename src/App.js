@@ -37,26 +37,27 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {/*storedaki state i comnponent içinde kullanabilmeyi sağlıyoruz */
-  /*return {products: state.products};//burada sadece belirli bir state i alarak, diğer state fields i filtreleyebiliriz*/
+/*const mapStateToProps = (state, props) => {/!*storedaki state i comnponent içinde kullanabilmeyi sağlıyoruz *!/
+  /!*return {products: state.products};//burada sadece belirli bir state i alarak, diğer state fields i filtreleyebiliriz*!/
 
   return {
     ...state,
     myCount: props.count + 2
   };
-};
+};*/
 
 const mapDispatchToProps = {
   onUpdateUser: updateUser,
   onGetUsers: getUsers
 };
 
-const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {/*hangi propsun nereden geldiğini bu şekilde görebiliriz*/
-  /*console.log(propsFromState);
+/*const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {/!*hangi propsun nereden geldiğini bu şekilde görebiliriz*!/
+  /!*console.log(propsFromState);
   console.log(propsFromDispatch);
-  console.log(ownProps);*/
+  console.log(ownProps);*!/
   return {...propsFromState, ...propsFromDispatch, ...ownProps};
-};
+};*/
 
 /*store ile component bağlantısını sağlıyoruz*/
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);
+export default connect((state, props) => ({...state, ...props}), mapDispatchToProps)(App);
