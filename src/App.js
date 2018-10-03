@@ -27,9 +27,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {/*storedaki state i comnponent içinde kullanabilmeyi sağlıyoruz */
+const mapStateToProps = (state, props) => {/*storedaki state i comnponent içinde kullanabilmeyi sağlıyoruz */
   /*return {products: state.products};//burada sadece belirli bir state i alarak, diğer state fields i filtreleyebiliriz*/
-  return state;
+  return {
+    ...state,
+    myCount:props.count + 2
+  };
 };
 
 const mapDispatchToProps = {

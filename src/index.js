@@ -35,5 +35,8 @@ const updateUserAction = {
 
 store.dispatch(updateUserAction);*/
 
-ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App count={4}/>
+  </Provider>, document.getElementById('root'));
 serviceWorker.unregister();
