@@ -3,39 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createStore} from 'redux';
+import {combineReducers, createStore} from 'redux';
 
-function reducer(state, action) {
-  if (action.type === 'changeTheChange') {
-    return action.payload.newState;
-  }
-  return 'state';
+function userReducer(state = '', action) {
+  return state;
 }
 
-const store = createStore(reducer);
+function productsReducer(state = [], action) {
+  return state;
+}
 
-console.log(store.getState());
-
-const action = {
-  type: 'changeTheChange',
-  payload: {
-    newState: 'new state'
-  }
-};
-
-const action2 = {
-  type: 'changeTheChange',
-  payload: {
-    newState: 'new state 2'
-  }
-};
-
-store.subscribe(() => {
-  console.log('Store updated:', store.getState());
+const rootReducer = combineReducers({
+  user: userReducer,
+  products: productsReducer,
 });
 
-store.dispatch(action);
-store.dispatch(action2);
+const store = createStore(rootReducer);
+
+console.log(store.getState());
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 serviceWorker.unregister();
