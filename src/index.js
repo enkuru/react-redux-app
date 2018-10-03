@@ -6,11 +6,19 @@ import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from 'redux';
 
 function userReducer(state = '', action) {
-  return state;
+  switch (action.type) {
+    case 'userUpdate':
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 function productsReducer(state = [], action) {
-  return state;
+  switch (action.type) {
+    default:
+      return state;
+  }
 }
 
 const rootReducer = combineReducers({
@@ -18,15 +26,28 @@ const rootReducer = combineReducers({
   products: productsReducer,
 });
 
-const store = createStore(rootReducer, {/*set initial state to reducers*/
-  products: [{
-    name: 'Samsung',
-    type: 'TV'
-  }],
-  user: 'USER'
-});
+const store = createStore(/*set initial state to reducers*/
+  rootReducer,
+  {
+    products: [{
+      name: 'Samsung',
+      type: 'TV'
+    }],
+    user: 'USER'
+  },
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const updateUserAction = {
+  type: 'userUpdate',
+  payload: {
+    user: 'New USER'
+  }
+};
 
 console.log(store.getState());
+
+store.dispatch(updateUserAction);
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 serviceWorker.unregister();
